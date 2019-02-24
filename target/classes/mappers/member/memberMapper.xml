@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- DAOImpl에서 사용 될 namespace : member -->
+<mapper namespace="member"> 
+  <select id="loginCheck" resultType="String">
+  /* member.loginCheck */
+    SELECT name
+    FROM MEMBER
+    WHERE userid = #{userid} 
+    AND pwd = #{pwd}
+  </select>
+
+  <select id="memberList" resultType="org.study.spring.model.member.dto.MemberDTO">
+  /* member.memberList */
+    SELECT *
+    FROM MEMBER
+    ORDER BY name
+  </select>
+  
+  <insert id="insertMember">
+  /* member.insertMember */
+  	INSERT INTO MEMBER
+  		(
+  			userid
+  		  , pwd
+  		  , name
+  		  , email
+  		) VALUES 
+  		(
+  			#{userid}
+  		  , #{pwd}
+  		  , #{name}
+  		  , #{email}
+  		)
+  </insert>
+  
+  <select id="readMember" resultType="memberDTO">
+  /* member.readMember */
+  	SELECT *
+  	FROM MEMBER
+  	WHERE userid = #{userid}
+  </select>
+  
+  <select id="checkPwd" resultType="int">
+  	SELECT COUNT(*)
+  	FROM MEMBER
+  	WHERE userid = #{userid}
+  	AND pwd = #{pwd}
+  </select>
+  
+  <update id="updateMember">
+  	UPDATE MEMBER
+  	SET name = #{name}
+  	  , pwd  = #{pwd}
+  	  , email = #{email}
+  	WHERE userid = #{userid}
+  </update>
+  
+  <delete id="deleteMember">
+  	DELETE
+  	FROM MEMBER
+  	WHERE userid = #{userid}
+  </delete>
+</mapper>
