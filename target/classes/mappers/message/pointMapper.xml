@@ -6,9 +6,9 @@
 <mapper namespace="point"> 
   
   <update id="point">
-  /* "point".point*/
+  /* point.point*/
   	UPDATE TBL_USER
-  	SET userPoint = #{userPoint}
+  	SET userPoint = userPoint + #{userPoint}
   	WHERE userID = #{userID}
   </update>
   

@@ -14,9 +14,10 @@ import org.springframework.stereotype.Component;
 public class LogCollector {
 	private static final Logger logger = LoggerFactory.getLogger(LogCollector.class);
 	
-	@Around("execution(* org.study.spring.controller..*Controller.*(..))"
-			+ "or execution(* org.study.spring.service..*Impl.*(..))"
-			+ "or execution(* org.study.spring.model..dao.*Impl.*(..))")
+	// 해당 하위 메소드들과 파라미터값을 모두 log로 보여줌
+//	@Around("execution(* org.study.spring.controller..*Controller.*(..))"
+//			+ "or execution(* org.study.spring.service..*Impl.*(..))"
+//			+ "or execution(* org.study.spring.model..dao.*Impl.*(..))")
 	public Object logExecute(ProceedingJoinPoint jp) throws Throwable {
 		long startTime = System.currentTimeMillis();
 		Object result = jp.proceed(); // proceed()를 기준으로 proceed() 위는 호출 전(stratTime)이 실행되고 아래 코드들이 실행된다.

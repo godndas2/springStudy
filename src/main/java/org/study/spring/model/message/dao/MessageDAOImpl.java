@@ -13,7 +13,7 @@ public class MessageDAOImpl implements MessageDAO {
 	
 	@Override
 	public void create(MessageDTO dto) {
-		sqlSession.insert("message.create", dto);
+		sqlSession.insert("message.insert", dto);
 	}
 
 	@Override

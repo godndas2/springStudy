@@ -15,7 +15,7 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired
 	PointDAO pointDao;
 	
-	@Transactional // method ë‚´ë¶€ì˜ ì½”ë“œë¥¼ íŠ¸ëœì­ì…˜(ê±°ë˜ì²˜ë¦¬ ë‹¨ìœ„)ë¡œ ë¬¶ìŒ
+	@Transactional // method ³»ºÎÀÇ ÄÚµå¸¦ Æ®·£Àè¼ÇÀ¸·Î ¹­À½
 	@Override
 	public void insertMessage(MessageDTO dto) {
 		messageDao.create(dto);

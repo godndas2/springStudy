@@ -5,7 +5,7 @@
   
 <mapper namespace="message"> 
   
-  <insert id="create">
+  <insert id="insert">
   /* message.create*/
   	INSERT INTO TBL_MESSAGE
   		(
@@ -15,7 +15,7 @@
   		  , message
   		) VALUES 
   		(
-  			message_seq.nextval,
+  			MESSAGE_SEQ.NEXTVAL,
   		  , #{targetid}
   		  , #{pwd}
   		  , #{sender}
