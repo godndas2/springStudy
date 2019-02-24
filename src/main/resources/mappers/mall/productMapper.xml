@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="product"> 
+  <select id="listProduct" resultType="org.study.spring.model.mall.dto.ProductDTO">
+  /* product.listProduct */
+    SELECT *
+    FROM PRODUCT
+    ORDER BY productName
+  </select>
+
+  <select id="detailProduct" resultType="org.study.spring.model.mall.dto.ProductDTO">
+  /* product.detailProduct */
+    SELECT *
+    FROM PRODUCT
+    WHERE productID = #{productID}
+  </select>
+  
+  <insert id="insert">
+  	INSERT 
+  	INTO PRODUCT
+  	VALUES (
+  			seq_product.nextval
+  		  , #{productName}
+  		  , #{price}
+  		  , #{description}
+  		  , #{imageURL}
+  			)
+  </insert>
+  
+  <update id="updateProduct">
+  	UPDATE PRODUCT
+  	SET productName = #{productName}
+  	  , price = #{price}
+  	  , description = #{description}
+  	  , imgURL = #{imgURL}
+  	WHERE productID = #{productID}
+  </update>
+  
+  <delete id="deleteProduct">
+  	DELETE
+  	FROM PRODUCT
+  	WHERE productID = #{productID}
+  </delete>
+  
+  <select id="fileInfo" resultType="String">
+  	SELECT imgURL
+  	FROM PRODUCT
+  	WHERE productID = #{productID}
+  </select>
+</mapper>

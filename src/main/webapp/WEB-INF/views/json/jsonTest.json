@@ -1,0 +1,19 @@
+{
+  "cols": [
+        {"label":"상품명","type":"string"},
+        {"label":"가격","type":"number"}
+      ],
+  "rows": [
+        {
+        "c":[
+        {
+        "v":"Mushrooms"
+        },
+        {"v":50000
+        ]},
+        {"c":[{"v":"Onions"},{"v":5000}]},
+        {"c":[{"v":"Olives"},{"v":250000}]},
+        {"c":[{"v":"Zucchini"},{"v":7000}]},
+        {"c":[{"v":"Pepperoni"},{"v":4500}]}
+      ]
+}

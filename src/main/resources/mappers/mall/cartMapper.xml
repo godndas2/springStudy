@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cart"> 
+  <insert id="insert">
+  /* cart.insert */
+    INSERT 
+    INTO CART (
+    			cartID,userid,productID,count
+    		  ) VALUES 
+    		  (
+    		  	SEQ_CART.NEXTVAL
+    		  , #{userid}
+    		  , #{productID}
+    		  , #{count}
+    		  )
+  </insert>
+
+  <select id="listCart" resultType="org.study.spring.model.mall.dto.CartDTO">
+ 	 /* cart.listCart */
+		SELECT cartID
+		     , p.productID
+		     , c.userid
+		     , name
+		     , productName
+		     , count
+		     , price
+		     , (price * count) money
+		FROM MEMBER m, CART c, PRODUCT p
+		WHERE m.userid = c.userid
+		AND c.productID = p.productID
+		AND c.userid = #{userid}
+		ORDER BY cardID
+  </select>
+  
+  <select id="totalMoney" resultType="int">
+  	SELECT NVL(sum(price * count), 0)
+  	FROM CART c, PRODUCT p
+  	WHERE c.productID = p.productID
+  	AND userid = #{userid}
+  </select>
+  
+  <select id="cartMoney" resultType="org.study.spring.model.mall.dto.CartDTO">
+  	SELECT productName
+  		 , sum(price * count) money
+  	FROM CART c, PRODUCT p
+  	WHERE c.productID = p.productID
+  	GROUP BY productName
+  	ORDER BY productName
+  </select>
+</mapper>
