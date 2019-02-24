@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Chart</title>
 <%@ include file="../include/header.jsp" %>
 <!-- Google Chart CDN -->
-<script type="text/javascript" src="https://www.google.com/jsapi" />
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 // Google Library Load..
 google.load('visualization', '1', {
@@ -32,7 +32,7 @@ function drawChart() {
 // 	var chart = new google.visualization.LineChart(document.getElementById('chart_div')); 
 // 	var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
 	chart.draw(data, {
-		title : "chart",
+		title : "총액 가격 차트",
 		width : 600,
 		height : 440
 	});

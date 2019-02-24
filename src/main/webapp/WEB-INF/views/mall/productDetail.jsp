@@ -34,16 +34,16 @@ $(function() {
 					<td>${dto.price}</td>
 				</tr>
 				<tr>
-					<td>상품 설명</td>
+					<td>설명</td>
 					<td>${dto.description}</td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<form name="form1" method="post" action="${path}/cart/insert">
 							<input type="hidden" name="productID" value="${dto.productID}">
-							<select name="count">
-								<c:forEach begin="1" end="10" var="i">
-									<option value="${i}">${i}</option>
+							<select name="cnt">
+								<c:forEach begin="1" end="10" var="cnt">
+									<option value="${cnt}">${cnt}</option>
 								</c:forEach>
 							</select>&nbsp;개
 							

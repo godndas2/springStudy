@@ -8,13 +8,13 @@
   /* cart.insert */
     INSERT 
     INTO CART (
-    			cartID,userid,productID,count
+    			cartID,userid,productID,cnt
     		  ) VALUES 
     		  (
     		  	SEQ_CART.NEXTVAL
     		  , #{userid}
     		  , #{productID}
-    		  , #{count}
+    		  , #{cnt}
     		  )
   </insert>
 
@@ -25,18 +25,18 @@
 		     , c.userid
 		     , name
 		     , productName
-		     , count
+		     , cnt
 		     , price
-		     , (price * count) money
+		     , (price * cnt) money
 		FROM MEMBER m, CART c, PRODUCT p
 		WHERE m.userid = c.userid
 		AND c.productID = p.productID
 		AND c.userid = #{userid}
-		ORDER BY cardID
+		ORDER BY cartID
   </select>
   
   <select id="totalMoney" resultType="int">
-  	SELECT NVL(sum(price * count), 0)
+  	SELECT NVL(sum(price * cnt), 0)
   	FROM CART c, PRODUCT p
   	WHERE c.productID = p.productID
   	AND userid = #{userid}
@@ -44,10 +44,28 @@
   
   <select id="cartMoney" resultType="org.study.spring.model.mall.dto.CartDTO">
   	SELECT productName
-  		 , sum(price * count) money
+  		 , sum(price * cnt) money
   	FROM CART c, PRODUCT p
   	WHERE c.productID = p.productID
   	GROUP BY productName
   	ORDER BY productName
   </select>
+  
+  <delete id="delete">
+  	DELETE
+  	FROM CART
+  	WHERE cartID = #{cartID}
+  </delete>
+
+  <delete id="deleteAll">
+  	DELETE
+  	FROM CART
+  	WHERE userid = #{userid}
+  </delete>
+  
+  <update id="modifyCart">
+  	UPDATE CART
+  	SET cnt = #{cnt}
+  	WHERE cartID = #{cartID}
+  </update>
 </mapper>

@@ -12,15 +12,15 @@ import org.study.spring.model.mall.dto.ProductDTO;
 import org.study.spring.service.mall.ProductService;
 
 @Controller
-@RequestMapping("/mall/product/*") // ���� Url
+@RequestMapping("/mall/product/*") // 占쏙옙占쏙옙 Url
 public class ProductController {
 
 	@Autowired
 	private ProductService productService;
 	
-	@RequestMapping("list") // ��ܿ� /mall/product/ �� ��������� ������ list�� �ۼ��ص� /mall/product/list�� �ν����ش�. 
+	@RequestMapping("list") // 占쏙옙餠占� /mall/product/ 占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 list占쏙옙 占쌜쇽옙占쌔듸옙 /mall/product/list占쏙옙 占싸쏙옙占쏙옙占쌔댐옙. 
 	public ModelAndView list(ModelAndView mv) {
-		mv.setViewName("/mall/productList"); // �ش� �������� �̵�
+		mv.setViewName("/mall/productList"); // 占쌔댐옙 占쏙옙占쏙옙占쏙옙占쏙옙 占싱듸옙
 		mv.addObject("list", productService.listProduct());
 		return mv;
 	}
@@ -36,9 +36,9 @@ public class ProductController {
 	public String insert(ProductDTO dto) { 
 		String fName = "-";
 		
-		if (!dto.getMf().isEmpty()) { // ������ �����Ѵٸ�
+		if (!dto.getMf().isEmpty()) { // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싼다몌옙
 			fName = dto.getMf().getOriginalFilename();
-			String path = "D:\\springShoppingMall\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\shoppingMall\\";
+			String path = "D:\\springShoppingMall\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\shoppingMall\\src\\main\\webapp\\WEB-INF\\views\\image\\";
 			try {
 				new File(path).mkdir();
 				dto.getMf().transferTo(new File(path + fName));
@@ -55,9 +55,9 @@ public class ProductController {
 	public String update(ProductDTO dto) { 
 		String fName = "-";
 		
-		if (!dto.getMf().isEmpty()) { // ������ �����Ѵٸ�
+		if (!dto.getMf().isEmpty()) { // 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占싼다몌옙
 			fName = dto.getMf().getOriginalFilename();
-			String path = "D:\\springShoppingMall\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\shoppingMall\\";
+			String path = "D:\\springShoppingMall\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\shoppingMall\\src\\main\\webapp\\WEB-INF\\views\\image\\";
 			try {
 				new File(path).mkdir();
 				dto.getMf().transferTo(new File(path + fName));
@@ -75,21 +75,21 @@ public class ProductController {
 	
 	@RequestMapping("delete")
 	public String delete(@RequestParam int productID) { 
-		// ÷������ �̸�
+		// 첨占쏙옙占쏙옙占쏙옙 占싱몌옙
 		String fName = productService.fileInfo(productID);
 		
 		if (fName != null && !fName.equals("-")) { 
-			String path = "D:\\springShoppingMall\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\shoppingMall\\";
+			String path = "D:\\springShoppingMall\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\shoppingMall\\src\\main\\webapp\\WEB-INF\\views\\image\\";
 			File f = new File(path + fName);
-			if (f.exists()) { // ������ �ִٸ�
-				f.delete(); // ������
+			if (f.exists()) { // 占쏙옙占쏙옙占쏙옙 占쌍다몌옙
+				f.delete(); // 占쏙옙占쏙옙占쏙옙
 			}
 		}
 		productService.deleteProduct(productID);
 		return "redirect:/mall/product/list";
 	}
 	
-	// ������ ��ǰ ����
+	// 占쏙옙占쏙옙占쏙옙 占쏙옙품 占쏙옙占쏙옙
 	@RequestMapping("/edit/{productID}")  
 	public ModelAndView edit(@PathVariable("productID") int productID , ModelAndView mv) {
 		mv.setViewName("/mall/productEdit");

@@ -9,7 +9,7 @@ public class CartDTO {
 	private String productName;
 	private int price;
 	private int money;
-	private int count;
+	private int cnt;
 	public int getCartID() {
 		return cartID;
 	}
@@ -52,16 +52,16 @@ public class CartDTO {
 	public void setMoney(int money) {
 		this.money = money;
 	}
-	public int getCount() {
-		return count;
+	public int getCnt() {
+		return cnt;
 	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 	@Override
 	public String toString() {
 		return "CartDTO [cartID=" + cartID + ", userid=" + userid + ", name=" + name + ", productID=" + productID
-				+ ", productName=" + productName + ", price=" + price + ", money=" + money + ", count=" + count + "]";
+				+ ", productName=" + productName + ", price=" + price + ", money=" + money + ", cnt=" + cnt + "]";
 	}
 	
 	

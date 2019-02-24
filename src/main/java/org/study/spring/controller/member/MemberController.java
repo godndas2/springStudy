@@ -32,16 +32,16 @@ public class MemberController {
 
 	@RequestMapping("loginCheck")
 	public ModelAndView loginCheck(@ModelAttribute MemberDTO dto, HttpSession session) {
-		// @ModelAttribute�� �Ѳ����� �����͸� ���� �� �ִ� 
-		// String id, String pwd �̷��� ���� ���� �ʰ� @ModelAttribute�� ����ؼ� 
-		// MemberDTO���� �̹� �������� userid�� pwd�� ������ MemberDTO�� �����͵���  @ModelAttribute�� ����ؼ� �޾ƿ� �� �ִ�.
+		// @ModelAttribute占쏙옙 占싼뀐옙占쏙옙占쏙옙 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙 占쏙옙 占쌍댐옙 
+		// String id, String pwd 占싱뤄옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 占십곤옙 @ModelAttribute占쏙옙 占쏙옙占쏙옙漫占� 
+		// MemberDTO占쏙옙占쏙옙 占싱뱄옙 占쏙옙占쏙옙占쏙옙占쏙옙 userid占쏙옙 pwd占쏙옙 占쏙옙占쏙옙占쏙옙 MemberDTO占쏙옙 占쏙옙占쏙옙占싶듸옙占쏙옙  @ModelAttribute占쏙옙 占쏙옙占쏙옙漫占� 占쌨아울옙 占쏙옙 占쌍댐옙.
 		
 		String id = memberService.loginCheck(dto, session);
 		logger.info("id : " + id);
 		ModelAndView mv = new ModelAndView();
 		
-		if (id != null) { // login ���� �� homepage�� �̵�
-			mv.setViewName("home");
+		if (id != null) { // login 占쏙옙占쏙옙 占쏙옙 homepage占쏙옙 占싱듸옙
+			mv.setViewName("main");
 		} else {
 			mv.setViewName("member/login");
 			mv.addObject("message", "error");
@@ -58,39 +58,33 @@ public class MemberController {
 		return mv;
 	}
 	
-	@RequestMapping("member/list") // url�� ��û�� �ּ�
+	@RequestMapping("member/list") // url占쏙옙 占쏙옙청占쏙옙 占쌍쇽옙
 	public String memberList(Model model) {
 		
-		// System.out.println("MemberService : " + memberService); // memberService Ȯ���غ���
+		// System.out.println("MemberService : " + memberService); // memberService 확占쏙옙占쌔븝옙占쏙옙
 		List<MemberDTO> list = memberService.memberList();
-		logger.info("ȸ�� ��� : " + list);
-		model.addAttribute("list", list); // model�� �����ϰ� member/memberList�� ������.
+		logger.info("회占쏙옙 占쏙옙占� : " + list);
+		model.addAttribute("list", list); // model占쏙옙 占쏙옙占쏙옙占싹곤옙 member/memberList占쏙옙 占쏙옙占쏙옙占쏙옙.
 		
-		return "member/memberList"; // ��µǴ� ������ : WEB-INF/views/member/memberList.jsp
+		return "member/memberList"; // 占쏙옙쨉풔占� 占쏙옙占쏙옙占쏙옙 : WEB-INF/views/member/memberList.jsp
 	}
 
-	@RequestMapping(value = "member/create", method = RequestMethod.GET) 
-	public String memberCreate() {
-		return "member/create"; // ȸ����� ������ �̵�
+	@RequestMapping(value = "member/insert", method = RequestMethod.GET) 
+	public String memberInsertForm() {
+		return "member/insert"; // 회占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占싱듸옙
 	}
 	
-	// @ModelAttribute : ��� ������ �Է��� Data�� �����Ѵ�.
-	@RequestMapping(value = "member/create" ,method = RequestMethod.POST) 
-	public String memberCreate(@ModelAttribute MemberDTO dto) {
+	// @ModelAttribute : 占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쌉뤄옙占쏙옙 Data占쏙옙 占쏙옙占쏙옙占싼댐옙.
+	@RequestMapping(value = "member/insert" ,method = RequestMethod.POST) 
+	public String memberInsert(@ModelAttribute MemberDTO dto) {
 		memberService.insertMember(dto);
-		return "member/create"; // ��� ȭ�� ��������
-	}
-	
-	@RequestMapping("member/insert") 
-	public String memberInsert(MemberDTO dto) { // dto ������ ���ȭ�鿡 �Է��� Data�� ����ȴ�.
-		memberService.insertMember(dto);
-		return "redirect:/member/memberList"; // ��µǴ� ������ : WEB-INF/views/member/memberList.jsp
+		return "redirect:/member/list"; // 占쏙옙占� 화占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙
 	}
 	
 	@RequestMapping("member/read")
-	public String memberRead(@RequestParam String userid, Model model) { // @RequestParam : ���� �Է��� �ϳ��ϳ��� ���� �������ֱ����� �������. ���ֵ� �� ���ư���.
+	public String memberRead(@RequestParam String userid, Model model) { // @RequestParam : 占쏙옙占쏙옙 占쌉뤄옙占쏙옙 占싹놂옙占싹놂옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쌍깍옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占�. 占쏙옙占쌍듸옙 占쏙옙 占쏙옙占싣곤옙占쏙옙.
 		
-		model.addAttribute("dto", memberService.readMember(userid)); // model�� ȸ�� ������ ���� 
+		model.addAttribute("dto", memberService.readMember(userid)); // model占쏙옙 회占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 
 		return "member/read";
 	}
 	
@@ -98,16 +92,16 @@ public class MemberController {
 	public String update(@ModelAttribute MemberDTO dto, Model model) {
 		// pwd check
 		boolean result = memberService.checkPwd(dto.getUserid(), dto.getPwd());
-		logger.info("��й�ȣ Ȯ�� : " + result);
+		logger.info("占쏙옙橘占싫� 확占쏙옙 : " + result);
 		
-		if (result) { // pwd�� true�� ���
+		if (result) { // pwd占쏙옙 true占쏙옙 占쏙옙占�
 			memberService.updateMember(dto);
-			return "redirect:/member/list"; // ���� ���� �� ������� ������
+			return "redirect:/member/list"; // 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙
 		} else {
 			MemberDTO md = memberService.readMember(dto.getUserid());
-			dto.setJoinDate(md.getJoinDate()); // ��¥ ����
+			dto.setJoinDate(md.getJoinDate()); // 占쏙옙짜 占쏙옙占쏙옙
 			model.addAttribute("dto",dto);
-			model.addAttribute("message","��й�ȣ�� ��ġ���� �ʽ��ϴ�");
+			model.addAttribute("message","占쏙옙橘占싫ｏ옙占� 占쏙옙치占쏙옙占쏙옙 占십쏙옙占싹댐옙");
 			return "member/read";
 		}
 	}
@@ -117,11 +111,11 @@ public class MemberController {
 		// pwd check
 		boolean result = memberService.checkPwd(userid, pwd);
 		
-		if (result) { // pwd�� true�� ���
+		if (result) { // pwd占쏙옙 true占쏙옙 占쏙옙占�
 			memberService.deleteMember(userid);
-			return "redirect:/member/list"; // ���� ���� �� ������� ������
+			return "redirect:/member/list"; // 占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙
 		} else {
-			model.addAttribute("message","��й�ȣ�� ��ġ���� �ʽ��ϴ�");
+			model.addAttribute("message","占쏙옙橘占싫ｏ옙占� 占쏙옙치占쏙옙占쏙옙 占십쏙옙占싹댐옙");
 			model.addAttribute("dto",memberService.readMember(userid));
 			return "member/read";
 		}
