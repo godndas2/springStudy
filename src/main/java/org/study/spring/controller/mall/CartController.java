@@ -26,6 +26,7 @@ public class CartController {
 	public String insert(@ModelAttribute CartDTO dto, HttpSession session) {
 		
 		// 로그인 여부를 확인하기 위해 session에 저장된  "userid" 확인
+		// 이후에 Interceptor 학습떈 아래 if문을 주석으로 막아주시기 바랍니다.
 		String userid = (String) session.getAttribute("userid");
 		
 		if (userid == null) {
@@ -61,7 +62,9 @@ public class CartController {
 			mv.addObject("map",map);
 			return mv; // mall/cartList로 보내기
 		} else {
-			return new ModelAndView("member/login","",null);
+			// login을 안했으면 login 페이지로 보낸다
+			// 이후에 Interceptor 학습떈 아래 코드를 return null; 로 바꿔주시기 바랍니다.
+			return new ModelAndView("member/login","",null); 
 		}
 	}
 	

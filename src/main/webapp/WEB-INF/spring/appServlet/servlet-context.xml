@@ -42,4 +42,27 @@
 		<beans:constructor-arg value="D:/upload" /> <!-- D드라이브에 upload 폴더가 있어야한다. 임의로 지정가능 -->
 	</beans:bean>
 	
+	<!-- Interceptor -->
+	<beans:bean id="interCeptorTest" class="org.study.spring.interceptor.InterCeptorTest" />
+	<beans:bean id="loginInterceptor" class="org.study.spring.interceptor.LoginInterceptor" />
+	<beans:bean id="adminInterceptor" class="org.study.spring.interceptor.AdminInterceptor" />
+	<interceptors>
+		<interceptor>
+			<!-- Interceptor mapping info -->
+			<mapping path="/mall/**"/>
+			<beans:ref bean="interCeptorTest"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="cart/insert"/>
+			<mapping path="cart/list"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<!-- 관리자 체크를 위한 인터셉터 설정 -->
+		<interceptor>
+			<mapping path="/mall/product/insert"/>
+			<mapping path="/chart/*"/>
+			<beans:ref bean="adminInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>

@@ -39,7 +39,7 @@ function jsLogin() {
 <%@ include file="../include/menu.jsp" %>
 <h1>관리자 로그인</h1>
 <form name="form1" method="post">
-<table border="1" method="post">
+<table border="1">
 	<tr>
 		<td>아이디</td>
 		<td><input id="userid" name="userid"></td>
@@ -51,7 +51,7 @@ function jsLogin() {
 	<tr>
 		<td colspan="2" align="center">
 			<button type="button" id="btnLogin" onkeydown="if(event.keyCode == 13){jsLogin()}">로그인</button>
-			<c:if test="${param.message == 'nLogin'}">
+			<c:if test="${param.message == 'nologin'}">
 				<div style="color: red;">
 					로그인이 필요합니다
 				</div>

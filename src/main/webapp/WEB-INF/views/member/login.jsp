@@ -22,7 +22,7 @@
 	<tr>
 		<td colspan="2" align="center">
 			<button type="button" id="btnLogin">로그인</button>
-			<c:if test="${param.message == 'nLogin'}">
+			<c:if test="${param.message == 'nologin'}">
 				<div style="color: red;">
 					로그인이 필요합니다
 				</div>
