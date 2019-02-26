@@ -3,6 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <a href="${path}/mall/product/list">상품목록</a> ||
     <a href="${path}/mall/product/insert">상품등록</a> ||
+    <a href="${path}/email/insert">이메일 발송</a> ||
 <c:choose>
 	<c:when test="${sessionScope.userid == null}">
 		<a href="${path}/admin/login">관리자 로그인</a>
