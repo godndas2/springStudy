@@ -23,6 +23,8 @@
 	<resources location="/WEB-INF/views/image/" mapping="/image/**"/>
 	<!-- Google Chart -->
 	<resources location="/WEB-INF/views/json/" mapping="/json/**"/>
+	<!-- CK Editor -->
+	<resources location="/WEB-INF/views/ckeditor/" mapping="/ckeditor/**"/>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
