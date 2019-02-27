@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="reply"> 
+<insert id="insertReply">
+   INSERT INTO
+   REPLY (
+   			rno
+   		  , bno
+   		  , replytext
+   		  , replyer
+   		) VALUES 
+   		(
+   			reply_seq.nextval
+   		  , #{bno}
+   		  , #{replytext}
+   		  , #{replyer}
+   		)
+</insert>
+  
+<select id="count" resultType="int">
+	SELECT count(*)
+	FROM REPLY
+	WHERE bno = #{bno}
+</select>
+
+<select id="listReply" resultType="org.study.spring.model.board.dto,ReplyDTO">
+	<include refid="pagingHeader" />
+	SELECT rno
+	     , bno
+	     , replytext
+	     , replyer
+	     , name
+	     , r.regdate
+	     , r.mdydate
+	     ,(SELECT writer FROM BOARD WHERE bno = r.bno) writer
+	FROM REPLY r, MEMBER m
+	WHERE r.replyer = m.userid
+	AND bno = #{bno}
+	ORDER BY rno desc
+	<include refid="pagingFooter" />
+</select>
+<!-- 페이징 -->
+<sql id="pagingHeader">
+  	SELECT *
+  	FROM (
+  		  SELECT ROWNUM AS rn, A.*
+  		  FROM(
+  </sql>
+  <sql id="pagingFooter">
+  	) A
+  ) WHERE rn BETWEEN #{start}
+  AND #{end}
+  </sql>
+</mapper>

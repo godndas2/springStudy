@@ -8,8 +8,9 @@
 <a href="${path}/upload/upload">파일업로드</a> ||
 <a href="${path}/upload/uploadAjax">파일업로드(Ajax)</a> ||
 <a href="${path}/mall/product/list">상품목록</a> ||
-<a href="${path}/mall/product/insert">장바구니</a> ||
+<a href="${path}/mall/cart/list">장바구니</a> ||
 <a href="${path}/chart/googleChart">차트 보기</a> ||
+<a href="${path}/board/list">게시판</a> ||
 <c:choose>
 	<c:when test="${sessionScope.userid == null}">
 		<a href="${path}/member/login">로그인</a> ||

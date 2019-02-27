@@ -55,6 +55,8 @@
 			<beans:ref bean="interCeptorTest"/>
 		</interceptor>
 		<interceptor>
+			<mapping path="/board/insert"/>
+			<mapping path="/board/insertForm"/>
 			<mapping path="cart/insert"/>
 			<mapping path="cart/list"/>
 			<beans:ref bean="loginInterceptor"/>
