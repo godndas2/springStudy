@@ -17,26 +17,25 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	@Override
 	public void deleteFile(String fullName) {
-		// TODO Auto-generated method stub
-
+		sqlSession.delete("board.deleteAttach", fullName);
 	}
 
 	@Override
 	public List<String> getAttach(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("board.getAttach", bno);
 	}
 
 	@Override
 	public void addAttach(String fullName) {
-		// TODO Auto-generated method stub
-
+		sqlSession.insert("board.addAttach", fullName);
 	}
 
 	@Override
 	public void updateAttach(String fullName, int bno) {
-		// TODO Auto-generated method stub
-
+		Map<String, Object> map = new HashMap<>();
+		map.put("fullName", fullName);
+		map.put("bno", bno);
+		sqlSession.insert("board.updateAttach", map); // update인데 insert 하는 이유 : 새로운 첨부파일을 등록하기 때문
 	}
 
 	@Override
@@ -51,14 +50,12 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void update(BoardDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-
+		sqlSession.update("board.update", dto);
 	}
 
 	@Override
 	public void delete(int bno) throws Exception {
-		// TODO Auto-generated method stub
-
+		sqlSession.delete("board.delete", bno);
 	}
 
 	@Override

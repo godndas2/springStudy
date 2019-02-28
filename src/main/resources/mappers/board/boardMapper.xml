@@ -65,6 +65,58 @@
   	AND bno = #{bno}	
   </select>
   
+  <insert id="updateAttach">
+  	INSERT INTO
+  	ATTACH (
+  			fullName
+  		  , bno
+  	) VALUES 
+  	(
+  		#{fullName}
+  	  , #{bno}
+  	)
+  </insert>
+  
+  <update id="update">
+  	UPDATE
+  	BOARD
+  	SET title = #{title}
+  	  , content = #{content}
+  	WHERE bno = #{bno}
+  </update>
+  
+  <select id="getAttach" resultType="String">
+  	SELECT fullName
+  	FROM ATTACH
+  	WHERE bno = #{bno}
+  	ORDER BY regdate
+  </select>
+  
+  <!-- 첨부파일 삭제 -->
+  <delete id="deleteAttach">
+  	DELETE
+  	FROM ATTACH
+  	WHERE fullName = #{fullName}
+  </delete>
+  
+  <delete id="delete">
+  	DELETE
+  	FORM BOARD
+  	WHERE bno = #{bno}
+  </delete>
+  
+  <insert id="addAttach">
+  	INSERT INTO
+  	ATTACH (
+  			fullName
+  		  , bno
+  	)VALUES 
+  	(
+  		#{fullName}
+  	  , seq_board.currval
+  	)
+  </insert>
+  
   <!-- 검색, 페이징 -->
   <sql id="search">
   	<choose>

@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.study.spring.service.board.BoardService;
 import org.study.spring.util.MediaUtil;
 import org.study.spring.util.UploadFileUtils;
 
@@ -29,6 +31,9 @@ public class AjaxUploadController {
 	// servlet-context.xml 확인
 	@Resource(name = "uploadPath")
 	String uploadPath;
+	
+	@Autowired
+	BoardService boardService;
 	
 	@RequestMapping(value = "/upload/uploadAjax", method = RequestMethod.GET)
 	public void uploadAjax() {}// uploadAjax.jsp 로 이동
@@ -92,6 +97,8 @@ public class AjaxUploadController {
 		}
 		// 이미지 파일의 경우 썸네일 삭제
 		new File(uploadPath + fileName.replace('/', File.separatorChar)).delete(); // file 삭제
+		// 레코드 삭제
+		boardService.deleteFile(fileName);
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
 }

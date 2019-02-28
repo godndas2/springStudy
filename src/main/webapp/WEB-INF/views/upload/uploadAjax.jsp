@@ -47,7 +47,6 @@ $(function(){
 
 
 $(".fileDrop").on("dragenter dragover", function(event) {
-	alert("mm");
 	event.preventDefault(); // 기본효과 막기, 안막으면 드래그해서 사진을 옮길 때 사진이 전체화면으로 나타남(썸네일x)
 });
 // event : jQuery의 이벤트

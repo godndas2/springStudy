@@ -11,9 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.study.spring.model.board.dto.BoardDTO;
 import org.study.spring.service.board.BoardService;
@@ -80,5 +82,23 @@ public class BoardController {
 		mv.addObject("srchOption", srchOption);
 		mv.addObject("keyword", keyword);
 		return mv;
+	}
+	
+	@RequestMapping("update")
+	public String update(BoardDTO dto)throws Exception {
+		boardService.update(dto);
+		return "redirect:/board/list";
+	}
+	
+	@RequestMapping("getAttach/{bno}")
+	@ResponseBody
+	public List<String> getAttach(@PathVariable("bno") int bno) {
+		return boardService.getAttach(bno);
+	}
+
+	@RequestMapping("delete")
+	public String delete(int bno) throws Exception {
+		boardService.delete(bno);
+		return "redirect:/board/list";
 	}
 }

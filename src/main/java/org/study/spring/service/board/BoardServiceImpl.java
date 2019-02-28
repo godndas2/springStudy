@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.study.spring.model.board.dao.BoardDAO;
 import org.study.spring.model.board.dto.BoardDTO;
 
@@ -15,31 +16,36 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void deleteFile(String fullName) {
-		// TODO Auto-generated method stub
-
+		boardDao.deleteFile(fullName);
 	}
 
 	@Override
 	public List<String> getAttach(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.getAttach(bno);
 	}
 
 	@Override
 	public void addAttach(String fullName) {
-		// TODO Auto-generated method stub
-
+		boardDao.addAttach(fullName);
 	}
 
 	@Override
 	public void updateAttach(String fullName, int bno) {
-		// TODO Auto-generated method stub
-
+		boardDao.updateAttach(fullName, bno);
 	}
-
+	
+	@Transactional
 	@Override
 	public void insert(BoardDTO dto) throws Exception {
 		boardDao.insert(dto);
+		String [] files = dto.getFiles(); // 첨부파일 배열로 정보 저장
+		// 첨부파일이 없으면 종료
+		if (files == null) {
+			return;
+		}
+		for (String name : files) {
+			boardDao.addAttach(name);
+		}
 	}
 
 	@Override
@@ -47,16 +53,23 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.read(bno);
 	}
 
+	@Transactional
 	@Override
 	public void update(BoardDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-
+		boardDao.update(dto); // 수정
+		String [] files = dto.getFiles(); // 파일 정보를 가져온다
+		System.out.println("첨부파일 : "+ files);
+		if (files == null) {
+			return;
+		}
+		for (String name : files) {
+			boardDao.updateAttach(name, dto.getBno()); // 첨부파일이름 , 게시물 번호
+		}
 	}
 
 	@Override
 	public void delete(int bno) throws Exception {
-		// TODO Auto-generated method stub
-
+		boardDao.delete(bno);
 	}
 
 	@Override
