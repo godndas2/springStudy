@@ -19,10 +19,7 @@ Git clone 후, 새로 프로젝트를 생성해줍니다. ( 총 2개의 프로�
 [Git clone](https://jwgye.tistory.com/38)
 
 > 1 Day 1 Study를 기본 목표로 
-# DAY 1
-~~~
-1. Logging 과 DB 연동
-~~~
+# DAY 1 ( Logging 과 DB 연동 )
 ## Pom.xml
 ~~~ 
 Oracle Setting, Mybits, logback, logging을 Clone받은 프로젝트에서 확인하고 추가해줍니다.
