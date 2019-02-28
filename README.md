@@ -18,7 +18,7 @@ Git clone 후, 새로 프로젝트를 생성해줍니다. ( 총 2개의 프로�
 ~~~
 [Git clone](https://jwgye.tistory.com/38)
 
-> 하루에 한 개의 목차는 완료하는 것을 목표로 합니다
+> 1 Day 1 Study를 기본 목표로 
 # DAY 1
 ~~~
 1. Logging 과 DB 연동
